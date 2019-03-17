@@ -60,7 +60,7 @@ model = keras.Sequential([
  #             loss='sparse_categorical_crossentropy',
  #             metrics=['accuracy'])
 
-model.compile(loss="sparse_categorical_crossentropy", optimizer="SGD", metrics=["accuracy"])
+model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 
 
@@ -77,7 +77,7 @@ print('Точность после проверки:', test_acc)
 
 model_json = model.to_json()
 
-json_file = open("Fashion", "w")
+json_file = open("Fashion.json", "w")
 json_file.write(model_json)
 json_file.close()
 
