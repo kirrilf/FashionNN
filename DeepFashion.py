@@ -1,36 +1,30 @@
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-import cv2
 
-im = cv2.imread("Clo1.jpg")
+import random
+from PIL import Image, ImageDraw #Подключим необходимые библиотеки. 
 
-resized = cv2.resize(im, (28, 28), interpolation = cv2.INTER_AREA)
-
-#print(resized)
-
-#k = 0
-s1 = []
-
-for i in resized:
-	s = []
-	for j in i:
-		s.append(j[0])
-		s.append(j[1])
-		s.append(j[2])
-
-	s1.append(s)
-	#s.clear()
-	#tt = np.array(s)
-	##np.column_stack((a, b))
-	#print(s)
-	#pritn(tt)
-
-	#k+=1
-
-gg = np.array(s1)
-print(gg)
+image = Image.open("17.jpg") #Открываем изображение. 
+draw = ImageDraw.Draw(image) #Создаем инструмент для рисования. 
+width = image.size[0] #Определяем ширину. 
+height = image.size[1] #Определяем высоту. 	
+pix = image.load() #Выгружаем значения пикселей.
 
 
-	
+
+for i in range(width):
+	for j in range(height):
+		a = pix[i, j][0]
+		b = pix[i, j][1]
+		c = pix[i, j][2]
+		S = a + b + c
+		if (S > (((255 + 100) // 2) * 3)):
+			a, b, c = 255, 255, 255
+		else:
+			a, b, c = 0, 0, 0
+		draw.point((i, j), (a, b, c))
+
+
+
+image.save("ans.jpg", "JPEG")
+del draw
